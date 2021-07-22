@@ -16,6 +16,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class MainActivityTest {
     @Rule
@@ -30,6 +31,33 @@ public class MainActivityTest {
         Activity activity = getInstrumentation().waitForMonitorWithTimeout(monitor, 5000);
         assertNotNull(activity);
         activity.finish();
+    }
+
+    @Test
+    public void loginEmptyEmailNotAccepted(){
+        onView(withId(R.id.id_login_email)).perform(typeText(""));
+        onView(withId(R.id.id_login_password)).perform(typeText("123456"));
+        onView(withId(R.id.id_login)).perform(click());
+        Activity activity = getInstrumentation().waitForMonitorWithTimeout(monitor, 5000);
+        assertNull(activity);
+    }
+
+    @Test
+    public void emptyPasswordNotAccepted(){
+        onView(withId(R.id.id_login_email)).perform(typeText("joseph.larracas098@gmail.com"));
+        onView(withId(R.id.id_login_password)).perform(typeText(""));
+        onView(withId(R.id.id_login)).perform(click());
+        Activity activity = getInstrumentation().waitForMonitorWithTimeout(monitor, 5000);
+        assertNull(activity);
+    }
+
+    @Test
+    public void emptyEmailAndPasswordNotAccepted(){
+        onView(withId(R.id.id_login_email)).perform(typeText(""));
+        onView(withId(R.id.id_login_password)).perform(typeText(""));
+        onView(withId(R.id.id_login)).perform(click());
+        Activity activity = getInstrumentation().waitForMonitorWithTimeout(monitor, 5000);
+        assertNull(activity);
     }
 
 

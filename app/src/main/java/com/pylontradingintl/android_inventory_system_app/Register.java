@@ -24,12 +24,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextConfirmPassword;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         findViewById(R.id.id_register).setOnClickListener(this);
         findViewById(R.id.id_register_login).setOnClickListener(this);
 
@@ -56,46 +54,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             String password = editTextPassword.getText().toString().trim();
             String confirmPassword = editTextConfirmPassword.getText().toString().trim();
 
-
-/*
-            if (userName.isEmpty()) {
-                editTextUserName.setError("Username is Required");
-                editTextUserName.requestFocus();
-                return;
-            }
-
-            if (email.isEmpty()) {
-                editTextEmail.setError("Email is Required");
-                editTextEmail.requestFocus();
-                return;
-            }
-
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                editTextEmail.setError("Email Address is not valid");
-                editTextEmail.requestFocus();
-                return;
-            }
-
-            if (password.isEmpty()) {
-                editTextPassword.setError("Please provide password");
-                editTextPassword.requestFocus();
-                return;
-            }
-
-            if (password.length() < 6) {
-                editTextPassword.setError("Minimum password length should be 6 characters!");
-                editTextPassword.requestFocus();
-                return;
-            }
-            if (!password.equals(confirmPassword)) {
-                editTextPassword.setError("Passwords did not match!");
-                editTextPassword.requestFocus();
-                editTextConfirmPassword.setError("Passwords did not match!");
-                editTextConfirmPassword.requestFocus();
-                return;
-            }
-
- */
              if(validateRegistrationInput(userName,email,password,confirmPassword)) {
                  progressDialog = new ProgressDialog(Register.this);
                  progressDialog.show();
@@ -135,7 +93,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
-    Boolean validateRegistrationInput(String userName, String email , String password, String confirmedPassword){
+    public Boolean validateRegistrationInput(String userName, String email , String password, String confirmedPassword){
         if(userName.isEmpty()){
             editTextUserName.setError("Username is Required");
             editTextUserName.requestFocus();
