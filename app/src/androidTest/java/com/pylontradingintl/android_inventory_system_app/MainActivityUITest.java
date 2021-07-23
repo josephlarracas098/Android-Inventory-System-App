@@ -18,7 +18,7 @@ import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentat
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class MainActivityTest {
+public class MainActivityUITest {
     @Rule
     public ActivityScenarioRule<MainActivity> mainActivityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
     Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(AdminPanel.class.getName(),null,false);

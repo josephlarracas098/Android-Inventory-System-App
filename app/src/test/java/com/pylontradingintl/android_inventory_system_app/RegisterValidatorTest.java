@@ -2,10 +2,10 @@ package com.pylontradingintl.android_inventory_system_app;
 
 import org.junit.Test;
 import static com.google.common.truth.Truth.assertThat;
-import static com.pylontradingintl.android_inventory_system_app.RegistrationValidator.*;
-import static com.pylontradingintl.android_inventory_system_app.RegistrationValidator.ValidationResult.*;
+import static com.pylontradingintl.android_inventory_system_app.InputValidator.*;
+import static com.pylontradingintl.android_inventory_system_app.InputValidator.ValidationResult.*;
 
-public class RegistrationValidatorTest {
+public class RegisterValidatorTest {
     @Test
     public void isUsernameNotEmptyReturnsSuccess(){
         User user = new User("example_user", "example_user@gmail.com", "123456", "123456");

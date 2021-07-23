@@ -1,17 +1,15 @@
 package com.pylontradingintl.android_inventory_system_app;
 
 import android.os.Build;
-import android.text.TextUtils;
-import android.util.Patterns;
 import androidx.annotation.RequiresApi;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
-import static com.pylontradingintl.android_inventory_system_app.RegistrationValidator.*;
-import static com.pylontradingintl.android_inventory_system_app.RegistrationValidator.ValidationResult.*;
+import static com.pylontradingintl.android_inventory_system_app.InputValidator.*;
+import static com.pylontradingintl.android_inventory_system_app.InputValidator.ValidationResult.*;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public interface RegistrationValidator extends Function<User, ValidationResult> {
+public interface InputValidator extends Function<User, ValidationResult> {
     enum ValidationResult{
         SUCCESS,
         USERNAME_EMPTY,
@@ -22,10 +20,10 @@ public interface RegistrationValidator extends Function<User, ValidationResult> 
         PASSWORDS_NOT_MATCH
     }
 
-    static RegistrationValidator isUsernameNotEmpty(){
+    static InputValidator isUsernameNotEmpty(){
         return user -> !user.getUsername().isEmpty() ? SUCCESS : USERNAME_EMPTY;
     }
-    static RegistrationValidator isEmailNotEmpty(){
+    static InputValidator isEmailNotEmpty(){
         return user -> !user.getEmail().isEmpty() ? SUCCESS : EMAIL_EMPTY;
     }
 /*
@@ -34,23 +32,23 @@ public interface RegistrationValidator extends Function<User, ValidationResult> 
     }
 
  */
-    static RegistrationValidator isEmailValid(){
+    static InputValidator isEmailValid(){
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         return user ->  pattern.matcher(user.getEmail()).matches() ? SUCCESS : EMAIL_NOT_VALID;
     }
 
-    static RegistrationValidator isPasswordNotEmpty(){
+    static InputValidator isPasswordNotEmpty(){
         return user -> !user.getPassword().isEmpty() ? SUCCESS : PASSWORD_EMPTY;
     }
-    static RegistrationValidator isPasswordNotLessThanSix(){
+    static InputValidator isPasswordNotLessThanSix(){
         return user -> user.getPassword().length() > 5 ? SUCCESS : PASSWORD_LENGTH_LESS_SIX;
     }
-    static RegistrationValidator arePasswordsMatch(){
+    static InputValidator arePasswordsMatch(){
         return user -> user.getPassword().equals(user.getConfirmedPassword()) ? SUCCESS : PASSWORDS_NOT_MATCH;
     }
 
-    default RegistrationValidator and (RegistrationValidator other){
+    default InputValidator and (InputValidator other){
         return user -> {
             ValidationResult result = this.apply(user);
             return result.equals(SUCCESS) ? other.apply(user) : result;

@@ -3,6 +3,7 @@ package com.pylontradingintl.android_inventory_system_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,39 +19,40 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static com.pylontradingintl.android_inventory_system_app.R.*;
+import static com.pylontradingintl.android_inventory_system_app.R.id.id_login_register;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText editTextEmail, editTextPassword;
-    private FirebaseAuth mAuth;
-    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(layout.activity_main);
 
-        editTextEmail = findViewById(R.id.id_login_email);
-        editTextPassword = findViewById(R.id.id_login_password);
-        findViewById(R.id.id_login_register).setOnClickListener(this);
-        findViewById(R.id.id_login).setOnClickListener(this);
-        mAuth = FirebaseAuth.getInstance();
 
+        findViewById(id_login_register).setOnClickListener(this);
+        findViewById(id.id_login).setOnClickListener(this);
 
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.id_login_register:
+            case id_login_register:
                 startActivity(new Intent(MainActivity.this, Register.class));
                 break;
-            case R.id.id_login:
+            case id.id_login:
                userLogin();
 
         }
     }
-
-    private void userLogin() {
+        void userLogin() {
+        ProgressDialog progressDialog;
+        EditText editTextEmail = findViewById(id.id_login_email);
+        EditText editTextPassword = findViewById(id.id_login_password);
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         if(email.isEmpty()){
             editTextEmail.setError("Email is Required");
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         progressDialog = new ProgressDialog(MainActivity.this);
         progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.setContentView(layout.progress_dialog);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
