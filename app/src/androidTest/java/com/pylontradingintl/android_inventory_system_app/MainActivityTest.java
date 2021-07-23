@@ -23,7 +23,7 @@ public class MainActivityTest {
     public ActivityScenarioRule<MainActivity> mainActivityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
     Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(AdminPanel.class.getName(),null,false);
     @Test
-    public void testLoginToGotoAdminPanel(){
+    public void loginCredentialsAccepted(){
         onView(withId(R.id.id_login_email)).perform(typeText("joseph.larracas098@gmail.com"));
         onView(withId(R.id.id_login_password)).perform(typeText("123456"));
         onView(withId(R.id.id_login)).perform(click());
