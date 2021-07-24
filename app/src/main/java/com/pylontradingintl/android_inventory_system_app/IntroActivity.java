@@ -1,19 +1,20 @@
 package com.pylontradingintl.android_inventory_system_app;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
+
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
+
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+
+import android.os.Build;
 import android.os.Bundle;
+
 import android.view.View;
-import android.view.Window;
-import android.view.WindowInsets;
-import android.view.WindowInsetsController;
-import android.view.WindowManager;
+
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class IntroActivity extends AppCompatActivity {
     Button btnGetStarted;
     Animation btnAnim;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +46,11 @@ public class IntroActivity extends AppCompatActivity {
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         hideSystemBars();
 
-        if(restorePrefData()){
+        if(PreferenceUtils.containsPreference(getApplicationContext())){
             Intent mainActivity = new Intent(getApplicationContext(),AdminPanel.class);
             startActivity(mainActivity);
             finish();
         }
-
-
 
         tabIndicator = findViewById(R.id.tab_indicator);
         btnAnim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.button_animation);
@@ -106,25 +106,11 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mainActivity = new Intent(getApplicationContext(),AdminPanel.class);
                 startActivity(mainActivity);
-                savePrefData();
+                PreferenceUtils.savePreferenceData(getApplicationContext());
                 finish();
             }
         });
     }
-
-    private boolean restorePrefData() {
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
-        Boolean isIntroActivityOpenedBefore = pref.getBoolean("isIntroOpened",false);
-        return isIntroActivityOpenedBefore;
-    }
-
-    private void savePrefData() {
-        SharedPreferences preferences = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("isIntroOpened",true);
-        editor.commit();
-    }
-
 
     private void loadLastScreen() {
         btnNext.setVisibility(View.INVISIBLE);

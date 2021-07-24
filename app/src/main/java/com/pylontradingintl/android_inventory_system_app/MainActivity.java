@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.core.utilities.Validation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(layout.activity_main);
 
 
+
+
         findViewById(id_login_register).setOnClickListener(this);
         findViewById(id.id_login).setOnClickListener(this);
 
@@ -61,8 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
-
 
         void userLogin() {
             ProgressDialog progressDialog;
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             if (user.isEmailVerified()) {
-                                startActivity(new Intent(MainActivity.this, AdminPanel.class));
+                                startActivity(new Intent(MainActivity.this, IntroActivity.class));
                             } else {
                                 user.sendEmailVerification();
                                 Toast.makeText(MainActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
