@@ -63,6 +63,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         String password = editTextPassword.getText().toString().trim();
         String confirmPassword = editTextConfirmPassword.getText().toString().trim();
 
+
         ValidationResult result = isUsernameNotEmpty()
                 .and(isEmailNotEmpty())
                 .and(isEmailValid())
