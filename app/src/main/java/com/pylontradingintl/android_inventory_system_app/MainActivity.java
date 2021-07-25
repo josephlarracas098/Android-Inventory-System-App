@@ -38,8 +38,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             findViewById(id_login_register).setOnClickListener(this);
             findViewById(id_login).setOnClickListener(this);
         }else{
-            Intent intent = new Intent(MainActivity.this,AdminPanel.class);
-            startActivity(intent);
+            if(!containsPreference(getApplicationContext(),"intro-data",IS_INTRO_OPENED)) {
+                Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+                startActivity(intent);
+            }else {
+                Intent intent = new Intent(MainActivity.this, AdminPanel.class);
+                startActivity(intent);
+            }
         }
 
     }
