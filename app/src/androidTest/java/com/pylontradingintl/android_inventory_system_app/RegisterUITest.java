@@ -23,7 +23,7 @@ public class RegisterUITest {
     Instrumentation.ActivityMonitor monitor = getInstrumentation().addMonitor(MainActivity.class.getName(),null,false);
     @Test
     public void registerCredentialsAccepted(){
-        onView(withId(R.id.id_register_username)).perform(typeText("joseph"));
+        onView(withId(R.id.id_register_companyName)).perform(typeText("joseph"));
         onView(withId(R.id.id_register_email)).perform(typeText("joseph.larracas098@gmail.com"));
         onView(withId(R.id.id_register_password)).perform(typeText("123456"));
         onView(withId(R.id.id_register_confirm_password)).perform(typeText("123456"));
@@ -35,7 +35,7 @@ public class RegisterUITest {
     }
     @Test
     public void wrongEmailPatterNotAccepted(){
-        onView(withId(R.id.id_register_username)).perform(typeText("joseph"));
+        onView(withId(R.id.id_register_companyName)).perform(typeText("joseph"));
         onView(withId(R.id.id_register_email)).perform(typeText("chopes890gmail.com"));
         onView(withId(R.id.id_register_password)).perform(typeText("123456"));
         onView(withId(R.id.id_register_confirm_password)).perform(typeText("123456"));
@@ -46,7 +46,7 @@ public class RegisterUITest {
 
     @Test
     public void emptyUsernameNotAccepted(){
-        onView(withId(R.id.id_register_username)).perform(typeText(""));
+        onView(withId(R.id.id_register_companyName)).perform(typeText(""));
         onView(withId(R.id.id_register_email)).perform(typeText("chopes890@gmail.com"));
         onView(withId(R.id.id_register_password)).perform(typeText("123456"));
         onView(withId(R.id.id_register_confirm_password)).perform(typeText("123456"));
@@ -57,7 +57,7 @@ public class RegisterUITest {
 
     @Test
     public void passwordLengthLessThanSixNotAccepted(){
-        onView(withId(R.id.id_register_username)).perform(typeText(""));
+        onView(withId(R.id.id_register_companyName)).perform(typeText(""));
         onView(withId(R.id.id_register_email)).perform(typeText("chopes890@gmail.com"));
         onView(withId(R.id.id_register_password)).perform(typeText("1234"));
         onView(withId(R.id.id_register)).perform(click());
@@ -67,7 +67,7 @@ public class RegisterUITest {
 
     @Test
     public void emptyEmailNotAccepted(){
-        onView(withId(R.id.id_register_username)).perform(typeText("joseph"));
+        onView(withId(R.id.id_register_companyName)).perform(typeText("joseph"));
         onView(withId(R.id.id_register_email)).perform(typeText(""));
         onView(withId(R.id.id_register_password)).perform(typeText("123456"));
         onView(withId(R.id.id_register_confirm_password)).perform(typeText("123456"));
@@ -78,7 +78,7 @@ public class RegisterUITest {
 
     @Test
     public void emptyPasswordNotAccepted(){
-        onView(withId(R.id.id_register_username)).perform(typeText("joseph"));
+        onView(withId(R.id.id_register_companyName)).perform(typeText("joseph"));
         onView(withId(R.id.id_register_email)).perform(typeText("chopes890@gmail.com"));
         onView(withId(R.id.id_register_password)).perform(typeText(""));
         onView(withId(R.id.id_register)).perform(click());
@@ -88,7 +88,7 @@ public class RegisterUITest {
 
     @Test
     public void unMatchPasswordsNotAccepted(){
-        onView(withId(R.id.id_register_username)).perform(typeText("joseph"));
+        onView(withId(R.id.id_register_companyName)).perform(typeText("joseph"));
         onView(withId(R.id.id_register_email)).perform(typeText("chopes890@gmail.com"));
         onView(withId(R.id.id_register_password)).perform(typeText("123456"));
         onView(withId(R.id.id_register_confirm_password)).perform(typeText(""));

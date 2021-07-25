@@ -21,7 +21,7 @@ public interface InputValidator extends Function<User, ValidationResult> {
     }
 
     static InputValidator isUsernameNotEmpty(){
-        return user -> !user.getUsername().isEmpty() ? SUCCESS : USERNAME_EMPTY;
+        return user -> !user.getCompanyName().isEmpty() ? SUCCESS : USERNAME_EMPTY;
     }
     static InputValidator isEmailNotEmpty(){
         return user -> !user.getEmail().isEmpty() ? SUCCESS : EMAIL_EMPTY;

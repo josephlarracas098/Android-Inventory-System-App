@@ -53,7 +53,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     @RequiresApi(api = Build.VERSION_CODES.N)
     void userRegister(){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        EditText editTextUserName = findViewById(R.id.id_register_username);
+        EditText editTextUserName = findViewById(R.id.id_register_companyName);
         EditText editTextEmail = findViewById(R.id.id_register_email);
         EditText editTextPassword = findViewById(R.id.id_register_password);
         EditText editTextConfirmPassword = findViewById(R.id.id_register_confirm_password);

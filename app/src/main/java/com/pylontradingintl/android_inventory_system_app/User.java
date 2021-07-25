@@ -1,7 +1,7 @@
 package com.pylontradingintl.android_inventory_system_app;
 
 public class User {
-    private String username,email,password,confirmedPassword;
+    private String companyName,email,password,confirmedPassword;
 
     public User(){
 
@@ -12,15 +12,15 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String email, String password) {
-        this.username = username;
+    public User(String companyName, String email, String password) {
+        this.companyName = companyName;
         this.email = email;
         this.password = password;
     }
 
 
-    public User(String username, String email, String password, String confirmedPassword) {
-        this.username = username;
+    public User(String companyName, String email, String password, String confirmedPassword) {
+        this.companyName = companyName;
         this.email = email;
         this.password = password;
         this.confirmedPassword = confirmedPassword;
@@ -34,12 +34,12 @@ public class User {
         this.confirmedPassword = confirmedPassword;
     }
 
-    public String getUsername() {
-        return username;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getEmail() {

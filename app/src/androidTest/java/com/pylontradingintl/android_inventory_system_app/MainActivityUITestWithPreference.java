@@ -23,7 +23,7 @@ import static org.junit.Assert.assertNotNull;
 public class MainActivityUITestWithPreference {
     @Rule
     public ActivityScenarioRule<MainActivity> mainActivityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
-    Instrumentation.ActivityMonitor adminPanelActivityMonitor = getInstrumentation().addMonitor(AdminPanel.class.getName(),null,false);
+    Instrumentation.ActivityMonitor adminPanelActivityMonitor = getInstrumentation().addMonitor(Category.class.getName(),null,false);
 
     @Test
     public void test_Main_Go_AdminPanel(){

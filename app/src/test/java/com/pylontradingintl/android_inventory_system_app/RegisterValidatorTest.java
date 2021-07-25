@@ -7,13 +7,13 @@ import static com.pylontradingintl.android_inventory_system_app.InputValidator.V
 
 public class RegisterValidatorTest {
     @Test
-    public void isUsernameNotEmptyReturnsSuccess(){
+    public void isCompanyNotEmptyReturnsSuccess(){
         User user = new User("example_user", "example_user@gmail.com", "123456", "123456");
         ValidationResult result = isUsernameNotEmpty().apply(user);
         assertThat(result).isEqualTo(SUCCESS);
     }
     @Test
-    public void isUsernameEmptyReturnsUsernameEmpty(){
+    public void isCompanyEmptyReturnsUsernameEmpty(){
         User user = new User("", "example_user@gmail.com", "123456", "123456");
         ValidationResult result = isUsernameNotEmpty().apply(user);
         assertThat(result).isEqualTo(USERNAME_EMPTY);

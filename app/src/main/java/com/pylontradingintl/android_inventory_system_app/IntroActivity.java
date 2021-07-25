@@ -9,7 +9,6 @@ import androidx.viewpager.widget.ViewPager;
 
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 
 import android.os.Build;
@@ -98,7 +97,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void proceedToAdminPanel(){
-        Intent mainActivity = new Intent(getApplicationContext(),AdminPanel.class);
+        Intent mainActivity = new Intent(getApplicationContext(), Category.class);
         startActivity(mainActivity);
         savePreferenceData(getApplicationContext(), "intro-data", IS_INTRO_OPENED);
         finish();

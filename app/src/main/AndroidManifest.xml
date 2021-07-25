@@ -12,7 +12,7 @@
         <activity android:name=".IntroActivity">
 
         </activity>
-        <activity android:name=".AdminPanel" />
+        <activity android:name=".Category" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this, IntroActivity.class);
                 startActivity(intent);
             }else {
-                Intent intent = new Intent(MainActivity.this, AdminPanel.class);
+                Intent intent = new Intent(MainActivity.this, Category.class);
                 startActivity(intent);
             }
         }
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             if (user.isEmailVerified()) {
                                 if(containsPreference(getApplicationContext(), "intro-data", IS_INTRO_OPENED)){
-                                    Intent intent = new Intent(getApplicationContext(),AdminPanel.class);
+                                    Intent intent = new Intent(getApplicationContext(), Category.class);
                                     startActivity(intent);
                                     finish();
                                 }else{
