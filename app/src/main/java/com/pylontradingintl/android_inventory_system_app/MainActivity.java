@@ -9,9 +9,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Pair;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,20 +18,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.core.utilities.Validation;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import static com.pylontradingintl.android_inventory_system_app.InputValidator.*;
 import static com.pylontradingintl.android_inventory_system_app.InputValidator.isEmailNotEmpty;
 import static com.pylontradingintl.android_inventory_system_app.InputValidator.isEmailValid;
 import static com.pylontradingintl.android_inventory_system_app.InputValidator.isPasswordNotEmpty;
-import static com.pylontradingintl.android_inventory_system_app.R.*;
+import static com.pylontradingintl.android_inventory_system_app.R.id.*;
 import static com.pylontradingintl.android_inventory_system_app.R.id.id_login_register;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -42,10 +31,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(layout.activity_main);
+        setContentView(R.layout.activity_main);
 
         findViewById(id_login_register).setOnClickListener(this);
-        findViewById(id.id_login).setOnClickListener(this);
+        findViewById(id_login).setOnClickListener(this);
 
     }
 
@@ -56,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case id_login_register:
                 startActivity(new Intent(MainActivity.this, Register.class));
                 break;
-            case id.id_login:
+            case id_login:
                 userLogin();
                break;
 
@@ -65,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         void userLogin() {
             ProgressDialog progressDialog;
-            EditText editTextEmail = findViewById(id.id_login_email);
-            EditText editTextPassword = findViewById(id.id_login_password);
+            EditText editTextEmail = findViewById(id_login_email);
+            EditText editTextPassword = findViewById(id_login_password);
             String email = editTextEmail.getText().toString().trim();
             String password = editTextPassword.getText().toString().trim();
 
@@ -79,10 +68,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             switch (result) {
                 case SUCCESS:
+
                 progressDialog = new ProgressDialog(MainActivity.this);
                 progressDialog.show();
-                progressDialog.setContentView(layout.progress_dialog);
+                progressDialog.setContentView(R.layout.progress_dialog);
                 progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
 
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -90,7 +81,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             if (user.isEmailVerified()) {
-                                startActivity(new Intent(MainActivity.this, IntroActivity.class));
+                                if(PreferenceUtils.containsPreference(getApplicationContext())){
+                                    Intent intent = new Intent(getApplicationContext(),AdminPanel.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+                                    startActivity(intent);
+                                }
+
                             } else {
                                 user.sendEmailVerification();
                                 Toast.makeText(MainActivity.this, "Check your email to verify your account!", Toast.LENGTH_LONG).show();
