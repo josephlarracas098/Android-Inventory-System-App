@@ -13,13 +13,12 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+
 
 public class MainActivityUITestWithPreference {
     @Rule
@@ -34,7 +33,6 @@ public class MainActivityUITestWithPreference {
         onView(withId(R.id.id_progress_dialog)).check(matches(isDisplayed()));
         Activity activity = getInstrumentation().waitForMonitorWithTimeout(adminPanelActivityMonitor, 5000);
         assertNotNull(activity);
-        activity.finish();
     }
 
     @Test
@@ -48,6 +46,4 @@ public class MainActivityUITestWithPreference {
         pressBack();
         onView(withText("Exit Application?")).check(matches(isDisplayed()));
     }
-
-
 }

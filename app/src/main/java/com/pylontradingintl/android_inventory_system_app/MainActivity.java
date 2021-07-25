@@ -23,6 +23,7 @@ import static com.pylontradingintl.android_inventory_system_app.InputValidator.*
 import static com.pylontradingintl.android_inventory_system_app.InputValidator.isEmailNotEmpty;
 import static com.pylontradingintl.android_inventory_system_app.InputValidator.isEmailValid;
 import static com.pylontradingintl.android_inventory_system_app.InputValidator.isPasswordNotEmpty;
+import static com.pylontradingintl.android_inventory_system_app.PreferenceUtils.*;
 import static com.pylontradingintl.android_inventory_system_app.R.id.*;
 import static com.pylontradingintl.android_inventory_system_app.R.id.id_login_register;
 
@@ -31,10 +32,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        findViewById(id_login_register).setOnClickListener(this);
-        findViewById(id_login).setOnClickListener(this);
+        if(!containsPreference(getApplicationContext(), "logged", IS_USER_LOGGED)){
+            setContentView(R.layout.activity_main);
+            findViewById(id_login_register).setOnClickListener(this);
+            findViewById(id_login).setOnClickListener(this);
+        }else{
+            Intent intent = new Intent(MainActivity.this,AdminPanel.class);
+            startActivity(intent);
+        }
 
     }
 
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, Register.class));
                 break;
             case id_login:
+
                 userLogin();
                break;
 
@@ -66,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+
+
             switch (result) {
                 case SUCCESS:
 
@@ -81,14 +90,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             if (user.isEmailVerified()) {
-                                if(PreferenceUtils.containsPreference(getApplicationContext())){
+                                if(containsPreference(getApplicationContext(), "intro-data", IS_INTRO_OPENED)){
                                     Intent intent = new Intent(getApplicationContext(),AdminPanel.class);
                                     startActivity(intent);
                                     finish();
                                 }else{
-                                    Intent intent = new Intent(MainActivity.this, IntroActivity.class);
+                                    Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
+
+                                savePreferenceData(getApplicationContext(),"logged", IS_USER_LOGGED);
 
                             } else {
                                 user.sendEmailVerification();

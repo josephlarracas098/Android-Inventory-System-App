@@ -1,5 +1,8 @@
 package com.pylontradingintl.android_inventory_system_app;
 
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+
+import org.junit.Rule;
 import org.junit.Test;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -10,6 +13,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 public class MainActivityUITestValidation {
+    @Rule
+    public ActivityScenarioRule<MainActivity> mainActivityScenarioRule = new ActivityScenarioRule<>(MainActivity.class);
     @Test
     public void loginEmptyEmailNotAccepted(){
         onView(withId(R.id.id_login_email)).perform(typeText(""));

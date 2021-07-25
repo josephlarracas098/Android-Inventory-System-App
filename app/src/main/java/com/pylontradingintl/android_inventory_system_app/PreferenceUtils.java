@@ -7,18 +7,21 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class PreferenceUtils  {
-    private static final String IS_INTRO_OPENED = "isIntroOpened";
 
-    public static boolean containsPreference(Context context) {
-        SharedPreferences pref = context.getSharedPreferences("intro-data",MODE_PRIVATE);
-        Boolean isIntroActivityOpenedBefore = pref.getBoolean(IS_INTRO_OPENED,false);
+    public static final String IS_INTRO_OPENED = "isIntroOpened";
+    public static final String IS_USER_LOGGED = "isUserLogged";
+
+
+    public static boolean containsPreference(Context context , String name , String key) {
+        SharedPreferences pref = context.getSharedPreferences(name,MODE_PRIVATE);
+        Boolean isIntroActivityOpenedBefore = pref.getBoolean(key,false);
         return isIntroActivityOpenedBefore;
     }
 
-    public static void savePreferenceData(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("intro-data",MODE_PRIVATE);
+    public static void savePreferenceData(Context context , String name , String key) {
+        SharedPreferences preferences = context.getSharedPreferences(name,MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(IS_INTRO_OPENED,true);
+        editor.putBoolean(key,true);
         editor.commit();
     }
 }

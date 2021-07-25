@@ -28,6 +28,7 @@ import java.util.List;
 
 import static androidx.core.view.WindowInsetsCompat.Type.systemBars;
 import static androidx.core.view.WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE;
+import static com.pylontradingintl.android_inventory_system_app.PreferenceUtils.*;
 
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener, TabLayout.OnTabSelectedListener {
 
@@ -39,7 +40,6 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
     Button btnGetStarted;
     Animation btnAnim;
     List<ScreenItem> mList = new ArrayList<>();
-    ProgressDialog progressDialog;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -100,7 +100,7 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
     private void proceedToAdminPanel(){
         Intent mainActivity = new Intent(getApplicationContext(),AdminPanel.class);
         startActivity(mainActivity);
-        PreferenceUtils.savePreferenceData(getApplicationContext());
+        savePreferenceData(getApplicationContext(), "intro-data", IS_INTRO_OPENED);
         finish();
     }
 
@@ -120,14 +120,8 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
 
-        progressDialog = new ProgressDialog(IntroActivity.this);
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
         proceedToAdminPanel();
 
-      //  progressDialog.hide();
     }
 
     @Override
